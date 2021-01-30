@@ -1,0 +1,26 @@
+.message {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	column-gap: 2.8rem;
+}
+.message:not(:last-child) {
+	margin-bottom: 2.5rem;
+}
+.message__metadata {
+	display: flex;
+	align-items: center;
+}
+.message__sender {
+	color: #d4d2d2;
+	font-size: 1.8rem;
+	font-weight: 700;
+	margin: 0;
+	margin-right: 2rem;
+}
+.message__date-time {
+	color: #f1f1f1;
+	font-size: 1.4rem;
+}
+.message__text {
+	margin-bottom: 0;
+}

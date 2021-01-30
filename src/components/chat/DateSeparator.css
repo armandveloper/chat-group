@@ -1,0 +1,14 @@
+.date-separator {
+	margin-bottom: 2.5rem;
+	user-select: none;
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	column-gap: 2rem;
+	align-items: center;
+}
+.date-separator::before,
+.date-separator::after {
+	content: '';
+	border: 1px solid #828282;
+}

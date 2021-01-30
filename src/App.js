@@ -1,25 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Sidebar from './components/layout/Sidebar';
+import ChatArea from './components/chat/ChatArea';
+import Modal from './components/ui/Modal';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [modalIsVisible, setModalVisible] = useState(false);
+	return (
+		<div className="app">
+			<Sidebar setModalVisible={setModalVisible} />
+			<ChatArea />
+			{modalIsVisible && <Modal setModalVisible={setModalVisible} />}
+		</div>
+	);
 }
 
 export default App;

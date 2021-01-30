@@ -1,0 +1,19 @@
+.searchbox {
+	background-color: #3c393f;
+	border-radius: 0.8rem;
+	height: 4.8rem;
+	padding: 0 1.25rem;
+	display: flex;
+	align-items: center;
+}
+.searchbox__input {
+	background: none;
+	border: none;
+	color: #fff;
+	font: inherit;
+	margin-left: 1rem;
+	flex: 1;
+}
+.searchbox__input:focus {
+	outline: none;
+}

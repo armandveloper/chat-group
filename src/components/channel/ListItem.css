@@ -1,0 +1,22 @@
+.sidebar-list-item {
+	cursor: pointer;
+	padding: 1.5rem 2.5rem 1.5rem 3.2rem;
+	display: grid;
+	grid-template-columns: 4.2rem 1fr;
+	align-items: center;
+	column-gap: 2rem;
+}
+.sidebar-list-item:hover {
+	background-color: #3c393f;
+}
+.sidebar-list-item__name {
+	font-size: 1.4rem;
+	font-weight: 700;
+	margin: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.sidebar-list-item__name--uppercase {
+	text-transform: uppercase;
+}

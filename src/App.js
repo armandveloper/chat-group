@@ -1,16 +1,13 @@
-import React, { useState } from 'react';
-import Sidebar from './components/layout/Sidebar';
-import ChatArea from './components/chat/ChatArea';
-import Modal from './components/ui/Modal';
+import React from 'react';
+// import ChatScreen from './screens/ChatScreen';
+import AuthScreen from './screens/AuthScreen';
 
 function App() {
-	const [modalIsVisible, setModalVisible] = useState(false);
 	return (
-		<div className="app">
-			<Sidebar setModalVisible={setModalVisible} />
-			<ChatArea />
-			{modalIsVisible && <Modal setModalVisible={setModalVisible} />}
-		</div>
+		<>
+			<AuthScreen />
+			{/* <ChatScreen /> */}
+		</>
 	);
 }
 

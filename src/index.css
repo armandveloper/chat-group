@@ -86,6 +86,10 @@ svg {
 	background-color: var(--color-blue);
 	color: #fff;
 }
+.btn--full {
+	display: block;
+	width: 100%;
+}
 .relative {
 	position: relative;
 }

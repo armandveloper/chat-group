@@ -1,12 +1,10 @@
 import React from 'react';
-// import ChatScreen from './screens/ChatScreen';
-import AuthScreen from './screens/AuthScreen';
+import AppRouter from './routers/AppRouter';
 
 function App() {
 	return (
 		<>
-			<AuthScreen />
-			{/* <ChatScreen /> */}
+			<AppRouter />
 		</>
 	);
 }

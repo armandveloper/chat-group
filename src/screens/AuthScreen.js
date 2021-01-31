@@ -1,13 +1,15 @@
 import React from 'react';
 import { Mail, Lock } from 'react-feather';
+import { Link, useLocation } from 'react-router-dom';
 import './Auth.css';
 
 function RegisterScreen() {
-	const authType = 'Register';
+	const { pathname } = useLocation();
+	console.log(pathname);
 	return (
 		<div className="auth-screen">
 			<div className="box">
-				{authType === 'Login' ? (
+				{pathname === '/login' ? (
 					<h1 className="box__title">Login</h1>
 				) : (
 					<>
@@ -42,16 +44,19 @@ function RegisterScreen() {
 						<Lock className="form__icon" />
 					</div>
 					<button type="submit" className="btn btn--blue btn--full">
-						{authType}
+						{pathname === '/login' ? 'Login' : 'Register'}
 					</button>
 				</form>
 				<p className="box__text">
-					{authType === 'Login'
+					{pathname === '/login'
 						? "Don't have an account?"
 						: 'Already have an account?'}{' '}
-					<a href="!#" className="box__link">
-						{authType === 'Login' ? 'Signup' : 'Login'}
-					</a>
+					<Link
+						to={pathname === '/login' ? '/register' : '/login'}
+						className="box__link"
+					>
+						{pathname === '/login' ? 'Signup' : 'Login'}
+					</Link>
 				</p>
 			</div>
 		</div>

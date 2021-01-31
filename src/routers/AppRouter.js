@@ -7,7 +7,7 @@ import EditProfileScreen from '../screens/EditProfileScreen';
 
 function AppRouter() {
 	return (
-		<Router>
+		<Router basename="/chat-group">
 			<div>
 				{/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}

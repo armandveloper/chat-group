@@ -1,9 +1,10 @@
-import React, { useState, useRef } from 'react';
-import { Plus, ChevronLeft } from 'react-feather';
+import React, { useRef, useContext } from 'react';
+import { Plus, ChevronLeft, X } from 'react-feather';
 import SearchBox from '../ui/SearchBox';
 import SidebarList from '../channel/SidebarList';
 import SidebarFooter from '../ui/SidebarFooter';
 import './Sidebar.css';
+import { UiContext } from '../../context/UiContext';
 
 const members = [
 	'Xanthe Neal',
@@ -14,19 +15,22 @@ const members = [
 ];
 const channels = ['Front-end developers', 'Random', 'Backend', 'Welcome'];
 
-function Sidebar({ setModalVisible }) {
-	const [isChannelView, setChannelView] = useState(true);
+const Sidebar = React.forwardRef(function ({ hideSidebar }, ref) {
+	const {
+		sidebarView,
+		showAllChannels,
+		showChannelInfo,
+		toggleModal,
+	} = useContext(UiContext);
 
-	const sidebarRef = useRef(null);
-
-	const toggleModal = () => setModalVisible(true);
+	const sidebar2Ref = useRef(null);
 
 	const backToChannelsView = () => {
-		sidebarRef.current.classList.add('sidebar__inner--out');
-		sidebarRef.current.addEventListener('animationend', () => {
+		sidebar2Ref.current.classList.add('sidebar__inner--out');
+		sidebar2Ref.current.addEventListener('animationend', () => {
 			console.log('finish');
-			sidebarRef.current.classList.remove('sidebar__inner--out');
-			setChannelView(false);
+			sidebar2Ref.current.classList.remove('sidebar__inner--out');
+			showAllChannels();
 		});
 	};
 
@@ -76,19 +80,29 @@ function Sidebar({ setModalVisible }) {
 				handleClick={true}
 				items={channels}
 				uppercase={true}
-				setChannelView={setChannelView}
+				setChannelView={showChannelInfo}
 			/>
 			<SidebarFooter />
 		</>
 	);
 
 	return (
-		<aside className="sidebar">
-			<div className="sidebar__inner sidebar__inner--in" ref={sidebarRef}>
-				{isChannelView ? channelViewSidebar : channelsViewSidebar}
-			</div>
-		</aside>
+		<div className="sidebar__overlay" ref={ref}>
+			<aside className="sidebar">
+				<div
+					className="sidebar__inner sidebar__inner--in"
+					ref={sidebar2Ref}
+				>
+					{sidebarView === 'info'
+						? channelViewSidebar
+						: channelsViewSidebar}
+				</div>
+			</aside>
+			<button className="btn--icon close-sidebar" onClick={hideSidebar}>
+				<X color="#fff" size={24} />
+			</button>
+		</div>
 	);
-}
+});
 
 export default Sidebar;

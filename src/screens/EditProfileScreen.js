@@ -1,43 +1,12 @@
-import React, { useRef } from 'react';
-import './Profile.css';
-import Avatar from '../components/ui/Avatar';
-import { Camera, ChevronLeft, Twitter, LogOut, User } from 'react-feather';
 import { Link } from 'react-router-dom';
+import { Camera, ChevronLeft } from 'react-feather';
+import './Profile.css';
+import ProfileHeader from '../components/layout/ProfileHeader';
 
 function EditProfileScreen() {
-	const popupRef = useRef(null);
-
-	const toggleMenu = ({ target }) => {
-		target.firstElementChild.classList.toggle('rotate');
-		popupRef.current.classList.toggle('popup-menu--visible');
-	};
 	return (
 		<div className="profile">
-			<header className="header">
-				<Avatar />
-				<p className="user-name">Armando Cruz</p>
-				<button
-					className="btn--icon btn--show-more"
-					onClick={toggleMenu}
-				>
-					<span>&#x25b2;</span>
-					<div className="popup-menu" ref={popupRef}>
-						<div className="popup-menu__option">
-							<User className="popup-menu__icon" />
-							Profile
-						</div>
-						<div className="popup-menu__option">
-							<Twitter className="popup-menu__icon" />
-							Twitter
-						</div>
-						<div className="line"></div>
-						<div className="popup-menu__option">
-							<LogOut className="popup-menu__icon" />
-							Logout
-						</div>
-					</div>
-				</button>
-			</header>
+			<ProfileHeader />
 			<div className="container">
 				<Link to="/profile" className="btn--icon btn--back">
 					<ChevronLeft />

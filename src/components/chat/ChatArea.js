@@ -1,13 +1,16 @@
 import React from 'react';
-import { Send } from 'react-feather';
+import { Menu, Send } from 'react-feather';
 import './ChatArea.css';
 import Message from './Message';
 import DateSeparator from './DateSeparator';
 
-function ChatArea() {
+function ChatArea({ toggleSidebar }) {
 	return (
 		<main className="chat__area">
 			<header className="chat__header">
+				<button className="btn--icon" onClick={toggleSidebar}>
+					<Menu color="#fff" size={24} />
+				</button>
 				<h1 className="h1">Front-end developers</h1>
 			</header>
 			<div className="chat__conversation">

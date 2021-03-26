@@ -2,15 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Profile.css';
 import Avatar from '../components/ui/Avatar';
+import ProfileHeader from '../components/layout/ProfileHeader';
 
 function ProfileScreen() {
 	return (
 		<div className="profile">
-			<header className="header">
-				<Avatar />
-				<p className="user-name">Armando Cruz</p>
-				<button className="btn--icon btn--show-more">&#x25b2;</button>
-			</header>
+			<ProfileHeader />
 			<h1 className="h1">Personal info</h1>
 			<p className="description">Basic info, like your name and photo</p>
 			<div className="profile__container">

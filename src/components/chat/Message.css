@@ -9,18 +9,32 @@
 .message__metadata {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
+}
+@media (min-width: 56.25em) {
+	.message__metadata {
+		justify-content: flex-start;
+	}
 }
 .message__sender {
 	color: #d4d2d2;
-	font-size: 1.8rem;
+	font-size: 1.4rem;
 	font-weight: 700;
 	margin: 0;
 	margin-right: 2rem;
 }
 .message__date-time {
 	color: #f1f1f1;
-	font-size: 1.4rem;
+	font-size: 1.2rem;
 }
 .message__text {
 	margin-bottom: 0;
+}
+@media (min-width: 56.25em) {
+	.message__sender {
+		font-size: 1.8rem;
+	}
+	.message__date-time {
+		font-size: 1.4rem;
+	}
 }

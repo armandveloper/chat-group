@@ -1,11 +1,18 @@
 .sidebar-list-item {
 	cursor: pointer;
-	padding: 1.5rem 2.5rem 1.5rem 3.2rem;
+	padding: 1.5rem 2rem 1.5rem 2rem;
 	display: grid;
 	grid-template-columns: 4.2rem 1fr;
 	align-items: center;
 	column-gap: 2rem;
 }
+
+@media (min-width: 75em) {
+	.sidebar-list-item {
+		padding: 1.5rem 2.5rem 1.5rem 3.2rem;
+	}
+}
+
 .sidebar-list-item:hover {
 	background-color: #3c393f;
 }

@@ -1,44 +1,104 @@
+.sidebar__overlay {
+	background-color: rgba(0, 0, 0, 0.4);
+	height: 100vh;
+	width: 100vw;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.3s, visibility 0.3s;
+	transition-delay: 0.3s;
+}
+.sidebar--show {
+	display: flex;
+	opacity: 1;
+	visibility: visible;
+	transition-delay: 0s;
+}
 .sidebar {
 	background-color: var(--sidebar-bg-color);
 	color: #fff;
 	height: 100vh;
-	flex: 0 0 32.4rem;
-	width: 32.4rem;
+	flex: 0 0 30rem;
+	width: 30rem;
+	transform: translate3d(-100%, 0, 0);
+	transition: transform 0.3s ease;
+}
+
+@media (min-width: 75em) {
+	.sidebar__overlay {
+		background: none;
+		height: auto;
+		width: auto;
+		position: unset;
+		opacity: 1;
+		visibility: visible;
+	}
+	.sidebar {
+		flex: 0 0 32.4rem;
+		width: 32.4rem;
+		transform: none;
+	}
 }
 .sidebar__inner {
 	height: 100%;
 	overflow: hidden auto;
 	display: flex;
 	flex-direction: column;
+	transition-delay: 0s;
 }
-.sidebar__inner--in {
+.sidebar--show .sidebar {
+	transform: translate3d(0, 0, 0);
+}
+.sidebar__overlay:not(.sidebar--show) .sidebar__inner--in {
 	animation: slide-in-left 0.3s ease-in;
 }
 .sidebar__inner--out {
-	animation: slide-out-right 0.3s ease-in forwards;
+	animation: slide-out-right 0.3s ease-in forwards !important;
 }
 .sidebar__top {
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-	padding: 1.6rem 2.5rem 1.6rem 3.2rem;
+	padding: 1rem 2rem;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+}
+@media (min-width: 75em) {
+	.sidebar__top {
+		padding: 1.6rem 2.5rem 1.6rem 3.2rem;
+	}
 }
 .sidebar__title {
 	font-size: 1.8rem;
 	line-height: 2.4rem;
 	margin: 0;
-	margin-left: 1rem;
 	user-select: none;
 	flex: 1;
 }
+@media (min-width: 75em) {
+	.sidebar__title {
+		margin-left: 1rem;
+		padding: 1.6rem 2.5rem 1.6rem 3.2rem;
+	}
+}
 .sidebar__space {
 	margin: 1.9rem 0 3.4rem;
-	padding: 0 2.5rem 0 3.2rem;
+	padding: 0 2rem;
 }
 .sidebar__channel-info {
 	margin: 2.5rem 0 4rem;
-	padding: 0 3.2rem;
+	padding: 0 2rem;
+}
+@media (min-width: 75em) {
+	.sidebar__space {
+		padding: 0 2.5rem 0 3.2rem;
+	}
+	.sidebar__channel-info {
+		padding: 0 3.2rem;
+	}
 }
 .sidebar__channel-info h4 {
 	color: #e0e0e0;
@@ -54,7 +114,21 @@
 }
 .sidebar__members_title {
 	color: #e0e0e0;
-	font-size: 1.6rem;
-	margin: 0 3.2rem 2rem;
+	font-size: 1.4rem;
+	margin: 0 2rem 2rem;
 	text-transform: uppercase;
+}
+.close-sidebar {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+}
+@media (min-width: 75em) {
+	.close-sidebar {
+		display: none;
+	}
+	.sidebar__members_title {
+		font-size: 1.6rem;
+		margin: 0 3.2rem 2rem;
+	}
 }

@@ -34,10 +34,10 @@
 	margin: 3.4rem 0;
 }
 .auth-screen .form__group {
-	height: 4.8rem;
 	margin-bottom: 1.4rem;
 	display: grid;
 	grid-template-columns: 1.6rem 2.4rem 1fr;
+	grid-template-rows: 4.8rem 2rem;
 	align-items: center;
 }
 .auth-screen .form__icon {
@@ -75,4 +75,11 @@
 }
 .box__link {
 	color: var(--color-blue);
+}
+.form__feedback--error {
+	color: #ee7b92;
+	font-size: 1.4rem;
+	line-height: 1.5;
+	grid-row: 2;
+	grid-column: 1 / -1;
 }

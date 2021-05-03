@@ -1,13 +1,21 @@
-import React from 'react';
-import { Mail, Lock } from 'react-feather';
+import { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import Alert from '../components/ui/Alert';
+import Form from '../components/ui/Form';
+import { UiContext } from '../context/UiContext';
 import './Auth.css';
 
 function RegisterScreen() {
+	const { message } = useContext(UiContext);
 	const { pathname } = useLocation();
-	console.log(pathname);
 	return (
 		<div className="auth-screen">
+			<Alert
+				show={message !== null}
+				message={message?.text || ''}
+				severity={message?.severity || 'error'}
+				autoHideDuration={3000}
+			/>
 			<div className="box">
 				{pathname === '/login' ? (
 					<h1 className="box__title">Login</h1>
@@ -21,32 +29,9 @@ function RegisterScreen() {
 						</p>
 					</>
 				)}
-				<form className="form">
-					<div className="form__group">
-						<input
-							type="email"
-							className="form__control"
-							placeholder="Emai"
-							aria-label="Type your emaill address"
-							name="email"
-							autoComplete="off"
-						/>
-						<Mail className="form__icon" />
-					</div>
-					<div className="form__group">
-						<input
-							type="password"
-							name="password"
-							className="form__control"
-							placeholder="Password"
-							aria-label="Type your password"
-						/>
-						<Lock className="form__icon" />
-					</div>
-					<button type="submit" className="btn btn--blue btn--full">
-						{pathname === '/login' ? 'Login' : 'Register'}
-					</button>
-				</form>
+
+				<Form type={pathname === '/login' ? 'login' : 'register'} />
+
 				<p className="box__text">
 					{pathname === '/login'
 						? "Don't have an account?"

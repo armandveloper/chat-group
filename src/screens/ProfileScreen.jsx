@@ -1,10 +1,26 @@
-import React from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
+import { fetchWithToken } from '../helpers/fetch';
 import './Profile.css';
 import Avatar from '../components/ui/Avatar';
 import ProfileHeader from '../components/layout/ProfileHeader';
 
 function ProfileScreen() {
+	const { auth } = useContext(AuthContext);
+
+	const [user, setUser] = useState(null);
+
+	useEffect(() => {
+		const getUser = async () => {
+			const resp = await fetchWithToken(`/users/${auth.uid}`);
+			const data = await resp.json();
+			console.log(data);
+			setUser(data.user);
+		};
+		getUser();
+	}, [auth]);
+
 	return (
 		<div className="profile">
 			<ProfileHeader />
@@ -22,29 +38,23 @@ function ProfileScreen() {
 				</div>
 				<div className="profile__section">
 					<h3 className="profile__section-title">Photo</h3>
-					<Avatar />
+					<Avatar url={user?.photo} name={user?.name} />
 				</div>
 				<div className="profile__section">
 					<h3 className="profile__section-title">Name</h3>
-					<p className="profile__section-text">Armando Cruz</p>
+					<p className="profile__section-text">{user?.name}</p>
 				</div>
 				<div className="profile__section">
 					<h3 className="profile__section-title">Bio</h3>
-					<p className="profile__section-text">
-						Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						Aut incidunt laboriosam provident eaque repellendus
-						optio sint totam, beatae amet perspiciatis molestias
-						nisi ipsum temporibus, itaque mollitia, quam expedita
-						reprehenderit. A!
-					</p>
+					<p className="profile__section-text">{user?.bio}</p>
 				</div>
 				<div className="profile__section">
 					<h3 className="profile__section-title">Phone</h3>
-					<p className="profile__section-text">1920495231</p>
+					<p className="profile__section-text">{user?.phone}</p>
 				</div>
 				<div className="profile__section">
 					<h3 className="profile__section-title">Email</h3>
-					<p className="profile__section-text">19307021@gmail.com</p>
+					<p className="profile__section-text">{user?.email}</p>
 				</div>
 			</div>
 		</div>

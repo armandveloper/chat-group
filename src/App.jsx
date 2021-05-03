@@ -1,10 +1,13 @@
+import { AuthProvider } from './context/AuthContext';
 import { UiProvider } from './context/UiContext';
 import AppRouter from './routers/AppRouter';
 
 function App() {
 	return (
 		<UiProvider>
-			<AppRouter />
+			<AuthProvider>
+				<AppRouter />
+			</AuthProvider>
 		</UiProvider>
 	);
 }

@@ -1,0 +1,80 @@
+.alert {
+	background-color: var(--sidebar-bg-color);
+	border-left: 0.4rem solid transparent;
+	border-radius: 0.4rem 0 0 0.4rem;
+	color: #fff;
+	display: flex;
+	font-size: 1.6rem;
+	padding: 2rem 4rem 2rem 1.5rem;
+	position: fixed;
+	top: 2rem;
+	right: 2rem;
+}
+.show {
+	animation: enter 0.25s ease;
+}
+.hide {
+	animation: exit 0.25s ease;
+}
+.alert > svg {
+	margin-right: 1rem;
+}
+.error {
+	border-left-color: var(--color-red);
+}
+.error > svg {
+	stroke: var(--color-red);
+}
+.success {
+	border-left-color: #00e676;
+}
+.success > svg {
+	stroke: #00e676;
+}
+.warning {
+	border-left-color: #ffd600;
+}
+.warning > svg {
+	stroke: #ffd600;
+}
+.close {
+	background: none;
+	border: none;
+	color: #fff;
+	cursor: pointer;
+	height: 3rem;
+	margin: 0;
+	width: 3rem;
+	padding: 0;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	top: -0.5rem;
+	right: 0;
+	transition: color 0.25s ease;
+}
+.close:focus {
+	outline: none;
+}
+.close:focus,
+.close:hover {
+	color: var(--color-red);
+}
+@keyframes enter {
+	from {
+		transform: translate3d(calc(100% + 2rem), 0, 0);
+	}
+	to {
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+@keyframes exit {
+	from {
+		transform: translate3d(0, 0, 0);
+	}
+	to {
+		transform: translate3d(calc(100% + 2rem), 0, 0);
+	}
+}

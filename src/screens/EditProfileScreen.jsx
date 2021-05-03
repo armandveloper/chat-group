@@ -1,9 +1,27 @@
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Camera, ChevronLeft } from 'react-feather';
+import { AuthContext } from '../context/AuthContext';
+import { fetchWithToken } from '../helpers/fetch';
 import './Profile.css';
 import ProfileHeader from '../components/layout/ProfileHeader';
+import Avatar from '../components/ui/Avatar';
 
 function EditProfileScreen() {
+	const { auth } = useContext(AuthContext);
+
+	const [user, setUser] = useState(null);
+
+	useEffect(() => {
+		const getUser = async () => {
+			const resp = await fetchWithToken(`/users/${auth.uid}`);
+			const data = await resp.json();
+			console.log(data);
+			setUser(data.user);
+		};
+		getUser();
+	}, [auth]);
+
 	return (
 		<div className="profile">
 			<ProfileHeader />
@@ -22,7 +40,7 @@ function EditProfileScreen() {
 					<form className="profile__form" autoComplete="off">
 						<div className="form__image">
 							<div className="profile__image-container">
-								<div className="image"></div>
+								<Avatar url={user?.photo} name={user?.name} />
 								<label htmlFor="image">
 									<Camera size={32} />
 								</label>
@@ -49,6 +67,8 @@ function EditProfileScreen() {
 								className="form__control"
 								id="name"
 								name="name"
+								value={user?.name}
+								readnOnly
 							/>
 						</div>
 						<div className="form__group">
@@ -59,6 +79,8 @@ function EditProfileScreen() {
 								className="form__control"
 								id="bio"
 								name="bio"
+								value={user?.bio}
+								readnOnly
 							/>
 						</div>
 						<div className="form__group">
@@ -70,6 +92,8 @@ function EditProfileScreen() {
 								className="form__control"
 								id="phone"
 								name="phone"
+								value={user?.phone}
+								readnOnly
 							/>
 						</div>
 						<button type="submit" className="btn btn--blue">

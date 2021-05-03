@@ -18,6 +18,15 @@ export const UiProvider = ({ children }) => {
 
 	const toggleModal = () => setModalOpen(!isModalOpen);
 
+	// Forma { text, severity }
+	const [message, setMessage] = useState(null);
+
+	const showAlert = (msg) => setMessage(msg);
+
+	const hideAlert = () => setMessage(null);
+
+	const [loading, setLoading] = useState(false);
+
 	return (
 		<UiContext.Provider
 			value={{
@@ -28,6 +37,11 @@ export const UiProvider = ({ children }) => {
 				closeModal,
 				openModal,
 				toggleModal,
+				showAlert,
+				hideAlert,
+				message,
+				loading,
+				setLoading,
 			}}
 		>
 			{children}

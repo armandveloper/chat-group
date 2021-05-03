@@ -67,6 +67,10 @@ svg {
 	text-align: center;
 	transition: all 0.2s ease;
 }
+.btn:disabled {
+	cursor: not-allowed;
+	opacity: 0.6;
+}
 @media (min-width: 37.5em) {
 	.btn {
 		padding: 0.8rem 3rem;

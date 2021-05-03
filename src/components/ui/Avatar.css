@@ -1,5 +1,10 @@
-.avatar {
+.avatar-div {
 	background-color: orangered;
+	border-radius: 0.7rem;
+	height: 4.2rem;
+	width: 4.2rem;
+}
+.avatar {
 	border-radius: 0.7rem;
 	height: 4.2rem;
 	width: 4.2rem;

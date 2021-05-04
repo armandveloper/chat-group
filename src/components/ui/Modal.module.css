@@ -1,0 +1,58 @@
+.overlay {
+	background-color: rgba(18, 15, 19, 0.5);
+	height: 100%;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.content {
+	background-color: #120f13;
+	border-radius: 1rem;
+	color: #fff;
+	margin: 0 2rem;
+	max-width: 66rem;
+	padding: 2rem;
+	width: 100%;
+}
+@media (orientation: landscape) {
+	.content {
+		margin: 0 4rem;
+		max-height: 85%;
+		overflow-y: auto;
+	}
+}
+@media (min-width: 56.25em) {
+	.content {
+		border-radius: 2.4rem;
+		padding: 3.4rem 3.8rem 2.2rem 4.4rem;
+	}
+}
+.open {
+	animation: modal-in 0.3s ease-out;
+}
+.hidden {
+	animation: zoom-out 0.25s ease;
+}
+@keyframes modal-in {
+	from {
+		transform: translate3d(0, -8rem, 0);
+	}
+	to {
+		transform: translate3d(0, 0, 0);
+	}
+}
+@keyframes zoom-out {
+	from {
+		transform: scale(1);
+	}
+	to {
+		transform: scale(0);
+	}
+}

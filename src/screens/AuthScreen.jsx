@@ -1,11 +1,11 @@
 import { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import Alert from '../components/ui/Alert';
-import Form from '../components/ui/Form';
 import { UiContext } from '../context/UiContext';
 import './Auth.css';
+import Alert from '../components/ui/Alert';
+import Form from '../components/ui/Form';
 
-function RegisterScreen() {
+function AuthScreen() {
 	const { message } = useContext(UiContext);
 	const { pathname } = useLocation();
 	return (
@@ -17,7 +17,7 @@ function RegisterScreen() {
 				autoHideDuration={3000}
 			/>
 			<div className="box">
-				{pathname === '/login' ? (
+				{pathname === '/auth/login' ? (
 					<h1 className="box__title">Login</h1>
 				) : (
 					<>
@@ -30,17 +30,23 @@ function RegisterScreen() {
 					</>
 				)}
 
-				<Form type={pathname === '/login' ? 'login' : 'register'} />
+				<Form
+					type={pathname === '/auth/login' ? 'login' : 'register'}
+				/>
 
 				<p className="box__text">
-					{pathname === '/login'
+					{pathname === '/auth/login'
 						? "Don't have an account?"
 						: 'Already have an account?'}{' '}
 					<Link
-						to={pathname === '/login' ? '/register' : '/login'}
+						to={
+							pathname === '/auth/login'
+								? '/auth/register'
+								: '/auth/login'
+						}
 						className="box__link"
 					>
-						{pathname === '/login' ? 'Signup' : 'Login'}
+						{pathname === '/auth/login' ? 'Signup' : 'Login'}
 					</Link>
 				</p>
 			</div>
@@ -48,4 +54,4 @@ function RegisterScreen() {
 	);
 }
 
-export default RegisterScreen;
+export default AuthScreen;

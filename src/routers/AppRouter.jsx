@@ -24,7 +24,7 @@ function AppRouter() {
 
 	return (
 		<Router basename="/chat-group">
-			<div>
+			<div className="app">
 				{/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
 				<Switch>
@@ -38,7 +38,7 @@ function AppRouter() {
 						component={PrivateRouter}
 						isLoggedIn={auth.logged}
 					/>
-					<Redirect to="/auth" />
+					<Redirect to="/auth/login" />
 				</Switch>
 			</div>
 		</Router>

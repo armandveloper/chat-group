@@ -2,6 +2,8 @@
 	background-color: #333;
 	color: #fff;
 	min-height: 100vh;
+	width: 100%;
+	overflow-y: auto;
 	padding-bottom: 4rem;
 }
 .header {
@@ -69,7 +71,7 @@
 }
 .profile__container {
 	max-width: 85rem;
-	margin: 4rem auto 0;
+	margin: 4rem auto 4rem;
 	width: 100%;
 }
 @media (min-width: 37.5em) {
@@ -156,6 +158,11 @@
 	gap: 2.5rem;
 	margin-bottom: 3rem;
 }
+@media (min-width: 37.5em) {
+	.form__image {
+		grid-template-columns: 7.2rem 1fr auto;
+	}
+}
 .profile__image-container {
 	cursor: pointer;
 	height: 7.2rem;
@@ -163,12 +170,23 @@
 	display: grid;
 	grid-template-columns: 1fr;
 }
-.image {
-	background-color: orangered;
+.profile__image-container img {
 	height: 100%;
 	width: 100%;
 	grid-row: 1;
 	grid-column: 1;
+}
+.profile__image-container::after {
+	content: '';
+	background-color: rgba(0, 0, 0, 0.6);
+	border-radius: 0.7rem;
+	height: 100%;
+	width: 100%;
+	grid-row: 1;
+	grid-column: 1;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 .profile__image-container label {
 	grid-row: 1;
@@ -176,6 +194,7 @@
 	align-self: center;
 	justify-self: center;
 	cursor: pointer;
+	z-index: 100;
 	opacity: 0;
 	visibility: hidden;
 	transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -184,10 +203,22 @@
 	opacity: 1;
 	visibility: visible;
 }
+.profile__image-container:hover::after {
+	opacity: 1;
+	visibility: visible;
+}
 .form__image-label {
 	color: #b8b4b4;
 	font: inherit;
 	text-transform: uppercase;
+}
+.form__image .btn {
+	grid-column: 1 / -1;
+}
+@media (min-width: 37.5em) {
+	.form__image .btn {
+		grid-column: 3;
+	}
 }
 .profile .form__group {
 	margin-bottom: 2.4rem;

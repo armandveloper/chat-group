@@ -60,7 +60,6 @@ export const AuthProvider = ({ children }) => {
 				checking: false,
 				logged: true,
 			});
-			showAlert({ text: body.msg, severity: 'success' });
 		} catch (err) {
 			console.log(err);
 			setLoading(false);
@@ -82,7 +81,16 @@ export const AuthProvider = ({ children }) => {
 			return false;
 		}
 
-		const resp = await fetchWithToken('/auth/renewToken');
+		const resp = await fetchWithToken('auth/renewToken');
+		if (resp.status === 401) {
+			setAuth({
+				uid: null,
+				checking: false,
+				logged: false,
+			});
+			return false;
+		}
+
 		const body = await resp.json();
 		if (body.success) {
 			const { uid } = body.user;

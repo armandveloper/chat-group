@@ -23,8 +23,15 @@
 	visibility: visible;
 }
 .popup-menu__option {
+	background: none;
+	border: none;
+	color: #fff;
+	cursor: pointer;
+	font-family: inherit;
 	font-size: 1.3rem;
+	margin: 0;
 	padding: 1rem;
+	width: 100%;
 	display: flex;
 	align-items: center;
 }

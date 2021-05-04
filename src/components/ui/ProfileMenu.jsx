@@ -1,26 +1,31 @@
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { LogOut, User, Users } from 'react-feather';
+import { AuthContext } from '../../context/AuthContext';
 import './Menu.css';
 
 function ProfileMenu({ isOpen }) {
+	const { logout } = useContext(AuthContext);
+
 	return (
 		<div
 			className={`popup-menu popup-menu--profile ${
 				isOpen ? 'popup-menu--visible' : ''
 			}`}
 		>
-			<div className="popup-menu__option">
+			<Link className="popup-menu__option" to="/profile">
 				<User className="popup-menu__icon" />
 				My Profile
-			</div>
-			<div className="popup-menu__option">
+			</Link>
+			<Link to="/" className="popup-menu__option">
 				<Users className="popup-menu__icon" />
 				Group Chat
-			</div>
+			</Link>
 			<div className="line"></div>
-			<div className="popup-menu__option">
+			<button className="popup-menu__option" onClick={logout}>
 				<LogOut className="popup-menu__icon" />
 				Logout
-			</div>
+			</button>
 		</div>
 	);
 }

@@ -3,7 +3,7 @@ import ChatScreen from '../screens/ChatScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import EditProfileScreen from '../screens/EditProfileScreen';
 
-const PrivaeteRouter = () => {
+const PrivateRouter = () => {
 	return (
 		<>
 			<Switch>
@@ -16,4 +16,4 @@ const PrivaeteRouter = () => {
 	);
 };
 
-export default PrivaeteRouter;
+export default PrivateRouter;

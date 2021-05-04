@@ -1,50 +1,43 @@
-import React, { useContext, useRef } from 'react';
-import { UiContext } from '../../context/UiContext';
-import './Modal.css';
+import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import styles from './Modal.module.css';
 
-function Modal({ isOpen }) {
-	const { closeModal } = useContext(UiContext);
+function Modal({ open, onClose, children }) {
+	const [shouldRender, setRender] = useState(open);
 
-	const modalRef = useRef(null);
+	console.log('should render:', shouldRender);
 
-	const handleCloseModal = ({ target }) => {
-		if (target.classList.contains('overlay')) {
-			modalRef.current.classList.add('modal--close');
-			modalRef.current.addEventListener('animationend', () =>
-				closeModal()
-			);
-		}
+	useEffect(() => {
+		if (open) setRender(true);
+	}, [open]);
+
+	const handleAnimationEnd = () => {
+		if (!open) setRender(false);
 	};
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		modalRef.current.classList.add('modal--close');
-		modalRef.current.addEventListener('animationend', () => closeModal());
-	};
+	if (!shouldRender) return null;
 
 	return (
-		isOpen && (
-			<div className="overlay" onClick={handleCloseModal}>
-				<div className="modal" ref={modalRef}>
-					<h2 className="modal__title">New Channel</h2>
-					<form onSubmit={handleSubmit}>
-						<input
-							type="text"
-							className="modal__input"
-							placeholder="Channel name"
-							aria-label="Channel name"
-						/>
-						<textarea
-							className="modal__textarea"
-							placeholder="Channel description"
-							aria-label="Channel description"
-						></textarea>
-						<button className="btn btn--blue">Save</button>
-					</form>
-				</div>
+		<div
+			className={styles.overlay}
+			onClick={onClose}
+			onAnimationEnd={handleAnimationEnd}
+		>
+			<div
+				onClick={(e) => e.stopPropagation()}
+				className={`${styles.content} ${
+					open ? styles.open : styles.hidden
+				}`}
+			>
+				{children}
 			</div>
-		)
+		</div>
 	);
 }
+
+Modal.propTypes = {
+	open: PropTypes.bool.isRequired,
+	onClose: PropTypes.func.isRequired,
+};
 
 export default Modal;

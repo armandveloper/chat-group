@@ -1,29 +1,25 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
-import { fetchWithToken } from '../helpers/fetch';
 import './Profile.css';
 import Avatar from '../components/ui/Avatar';
 import ProfileHeader from '../components/layout/ProfileHeader';
+import { AppContext } from '../context/AppContext';
 
 function ProfileScreen() {
-	const { auth } = useContext(AuthContext);
-
-	const [user, setUser] = useState(null);
+	const { user, getUser } = useContext(AppContext);
 
 	useEffect(() => {
-		const getUser = async () => {
-			const resp = await fetchWithToken(`/users/${auth.uid}`);
-			const data = await resp.json();
-			console.log(data);
-			setUser(data.user);
-		};
-		getUser();
-	}, [auth]);
+		if (!user) {
+			getUser();
+		}
+	}, [user, getUser]);
 
 	return (
 		<div className="profile">
-			<ProfileHeader />
+			<ProfileHeader
+				username={user?.name || ''}
+				photo={user?.photo || ''}
+			/>
 			<h1 className="h1">Personal info</h1>
 			<p className="description">Basic info, like your name and photo</p>
 			<div className="profile__container">

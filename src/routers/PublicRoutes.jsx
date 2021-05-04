@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Redirect, Route } from 'react-router-dom';
 
-const PublicRoute = ({ isLoggedIn, component: Component, ...rest }) => {
+const PublicRoutes = ({ isLoggedIn, component: Component, ...rest }) => {
 	return (
 		<Route
 			{...rest}
@@ -12,9 +12,9 @@ const PublicRoute = ({ isLoggedIn, component: Component, ...rest }) => {
 	);
 };
 
-PublicRoute.propTypes = {
+PublicRoutes.propTypes = {
 	isLoggedIn: PropTypes.bool.isRequired,
 	component: PropTypes.func.isRequired,
 };
 
-export default PublicRoute;
+export default PublicRoutes;

@@ -1,10 +1,9 @@
-import React from 'react';
+import styles from '../layout/Sidebar.module.css';
 import ListItem from './ListItem';
-import './SidebarList.css';
 
 function SidebarList({ items, uppercase, handleClick, setChannelView }) {
 	return (
-		<ul className="sidebar-list">
+		<ul className={styles.list}>
 			{items.map((item, i) => (
 				<ListItem
 					key={i}

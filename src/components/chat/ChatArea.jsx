@@ -1,14 +1,23 @@
-import React from 'react';
+import { useContext } from 'react';
 import { Menu, Send } from 'react-feather';
 import './ChatArea.css';
 import Message from './Message';
 import DateSeparator from './DateSeparator';
+import { UiContext } from '../../context/UiContext';
 
 function ChatArea({ toggleSidebar }) {
+	const { setShowSidebar } = useContext(UiContext);
+
 	return (
 		<main className="chat__area">
 			<header className="chat__header">
-				<button className="btn--icon" onClick={toggleSidebar}>
+				<button
+					className="btn--icon"
+					onClick={() => {
+						toggleSidebar();
+						setShowSidebar(true);
+					}}
+				>
 					<Menu color="#fff" size={24} />
 				</button>
 				<h1 className="h1">Front-end developers</h1>

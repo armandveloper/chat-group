@@ -32,3 +32,17 @@ export const fetchWithToken = (endpoit, data, method = 'GET') => {
 		body: JSON.stringify(data),
 	});
 };
+
+export const uploadPhoto = (endpoit, photo, method) => {
+	const baseURL = process.env.REACT_APP_API_URL;
+	const token = localStorage.getItem('chat-group:token') || '';
+	const formData = new FormData();
+	formData.append('image', photo);
+	return fetch(`${baseURL}/${endpoit}`, {
+		method,
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+		body: formData,
+	});
+};

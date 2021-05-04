@@ -1,37 +1,96 @@
-import { createContext, useState } from 'react';
+import { createContext, useReducer } from 'react';
+import uiReducer from '../reducers/uiReducer';
+import types from '../types';
+
+const initialState = {
+	loading: false,
+	isModalOpen: false,
+	sidebarView: 'all', // all | info
+	showSidebar: false,
+	message: null,
+};
 
 export const UiContext = createContext();
 
 export const UiProvider = ({ children }) => {
+	const [state, dispatch] = useReducer(uiReducer, initialState);
+
+	const { loading, isModalOpen, sidebarView, showSidebar, message } = state;
+
+	const setLoading = (loading) => {
+		dispatch({
+			type: types.UI_SET_lOADING,
+			payload: loading,
+		});
+	};
+
+	const closeModal = () => {
+		dispatch({
+			type: types.UI_SET_MODAL_OPEN,
+			payload: false,
+		});
+	};
+
+	const openModal = () => {
+		dispatch({
+			type: types.UI_SET_MODAL_OPEN,
+			payload: true,
+		});
+	};
+
+	const toggleModal = () => {
+		dispatch({
+			type: types.UI_SET_MODAL_OPEN,
+			payload: !isModalOpen,
+		});
+	};
+
 	// All channels or channel info
-	const [sidebarView, setSidebarView] = useState('all');
 
-	const showAllChannels = () => setSidebarView('all');
+	const showAllChannels = () => {
+		dispatch({
+			type: types.UI_SET_SIDEBAR_VIEW,
+			payload: 'all',
+		});
+	};
 
-	const showChannelInfo = () => setSidebarView('info');
+	const showChannelInfo = () => {
+		dispatch({
+			type: types.UI_SET_SIDEBAR_VIEW,
+			payload: 'info',
+		});
+	};
 
-	const [isModalOpen, setModalOpen] = useState(false);
-
-	const closeModal = () => setModalOpen(false);
-
-	const openModal = () => setModalOpen(true);
-
-	const toggleModal = () => setModalOpen(!isModalOpen);
+	const setShowSidebar = (show) => {
+		dispatch({
+			type: types.UI_SET_SHOW_SIDEBAR,
+			payload: show,
+		});
+	};
 
 	// Forma { text, severity }
-	const [message, setMessage] = useState(null);
 
-	const showAlert = (msg) => setMessage(msg);
+	const showAlert = (alert) => {
+		dispatch({
+			type: types.UI_SET_MESSAGE,
+			payload: alert,
+		});
+	};
 
-	const hideAlert = () => setMessage(null);
-
-	const [loading, setLoading] = useState(false);
+	const hideAlert = () => {
+		dispatch({
+			type: types.UI_SET_MESSAGE,
+			payload: null,
+		});
+	};
 
 	return (
 		<UiContext.Provider
 			value={{
 				sidebarView,
+				showSidebar,
 				showAllChannels,
+				setShowSidebar,
 				showChannelInfo,
 				isModalOpen,
 				closeModal,

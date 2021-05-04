@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import './Avatar.css';
 
 function Avatar({ url, name }) {
+	// if (!url) return null;
+
 	if (!url) {
 		return <div className="avatar-div" />;
 	}

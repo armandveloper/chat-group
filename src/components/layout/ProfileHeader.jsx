@@ -1,14 +1,15 @@
+import PropTypes from 'prop-types';
 import { usePopupMenu } from '../../hooks/usePopupMenu';
 import Avatar from '../ui/Avatar';
 import ProfileMenu from '../ui/ProfileMenu';
 
-function ProfileHeader() {
+function ProfileHeader({ photo, username }) {
 	const [isMenuOpen, toggleMenu] = usePopupMenu();
 
 	return (
 		<header className="header">
-			<Avatar />
-			<p className="user-name">Armando Cruz</p>
+			<Avatar name={username} url={photo} />
+			<p className="user-name">{username}</p>
 			<button className="btn--icon btn--show-more" onClick={toggleMenu}>
 				<span>&#x25b2;</span>
 			</button>
@@ -16,5 +17,10 @@ function ProfileHeader() {
 		</header>
 	);
 }
+
+ProfileHeader.propTypes = {
+	username: PropTypes.string.isRequired,
+	photo: PropTypes.string.isRequired,
+};
 
 export default ProfileHeader;

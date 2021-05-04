@@ -1,20 +1,20 @@
-import React from 'react';
 import Avatar from '../ui/Avatar';
 import './ListItem.css';
 
 function ListItem({ name, uppercase, handleClick, setChannelView }) {
 	const showChannelView = ({ target }) => {
-		const $sidebar = target.closest('.sidebar__inner');
-		$sidebar.classList.add('sidebar__inner--out');
-		$sidebar.addEventListener('animationend', () => {
-			$sidebar.classList.remove('sidebar__inner--out');
-			setChannelView(true);
-		});
+		// const $sidebar = target.closest('.sidebar__inner');
+		// $sidebar.classList.add('sidebar__inner--out');
+		// $sidebar.addEventListener('animationend', () => {
+		// 	$sidebar.classList.remove('sidebar__inner--out');
+		// 	setChannelView(true);
+		// });
+		setChannelView();
 	};
 	return handleClick ? (
+		// Esta es la lista de canales
 		<li className="sidebar-list-item" onClick={showChannelView}>
 			{/* <img src="" alt="" className="channel-img"/> */}
-			<Avatar />
 			<p
 				className={
 					uppercase
@@ -26,7 +26,8 @@ function ListItem({ name, uppercase, handleClick, setChannelView }) {
 			</p>
 		</li>
 	) : (
-		<li className="sidebar-list-item">
+		// Esta es la vista de los miembros de un canal
+		<li className="sidebar-list-item grid">
 			{/* <img src="" alt="" className="channel-img"/> */}
 			<Avatar />
 			<p

@@ -15,11 +15,11 @@ function Alert({ message, severity, show, autoHideDuration }) {
 	}, [show]);
 
 	useEffect(() => {
-		if (autoHideDuration) {
+		if (autoHideDuration && show) {
 			const timeout = setTimeout(hideAlert, autoHideDuration);
 			return () => clearTimeout(timeout);
 		}
-	}, [autoHideDuration, hideAlert]);
+	}, [show, autoHideDuration, hideAlert]);
 
 	const handleAnimationEnd = () => {
 		if (!show) {

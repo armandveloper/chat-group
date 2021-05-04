@@ -1,23 +1,18 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { ChevronLeft } from 'react-feather';
-import { UiContext } from '../../context/UiContext';
+// import { UiContext } from '../../context/UiContext';
+// import types from '../../types';
 import SidebarFooter from '../ui/SidebarFooter';
 import SidebarList from './SidebarList';
 import styles from '../layout/Sidebar.module.css';
 
-function SidebarChannel({ show }) {
+function SidebarChannel({ channel, show, setSidebarView }) {
 	const [shouldRender, setRender] = useState(show);
 
-	const { showAllChannels } = useContext(UiContext);
+	// const [, uiDispatch] = useContext(UiContext);
 
-	const members = [
-		'Xanthe Neal',
-		'Nellie Francis',
-		'Denzel Barret',
-		'Shaunna Firth',
-		'Annaliese Huynh',
-	];
+	const members = channel?.members || [];
 
 	useEffect(() => {
 		if (show) setRender(true);
@@ -27,6 +22,10 @@ function SidebarChannel({ show }) {
 
 	const handleAnimationEnd = () => {
 		if (!show) setRender(false);
+	};
+
+	const showAllChannels = () => {
+		setSidebarView('all');
 	};
 
 	return (
@@ -51,13 +50,8 @@ function SidebarChannel({ show }) {
 				<h3 className={styles.title}>All channels</h3>
 			</div>
 			<div className={styles.channelInfo}>
-				<h4>Front-end Developers</h4>
-				<p>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit.
-					Fuga nam eligendi illo quo veritatis, qui excepturi laborum
-					cupiditate odio quaerat, ab reiciendis debitis perferendis
-					repellendus!
-				</p>
+				<h4>{channel?.name}</h4>
+				<p>{channel?.description}</p>
 			</div>
 			<h4 className={styles.membersTitle}>Members</h4>
 			<SidebarList items={members} />

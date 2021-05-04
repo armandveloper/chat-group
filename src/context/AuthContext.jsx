@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useState } from 'react';
 import { fetchWithoutToken, fetchWithToken } from '../helpers/fetch';
+import types from '../types';
 import { UiContext } from './UiContext';
 
 const initialState = {
@@ -13,10 +14,12 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
 	const [auth, setAuth] = useState(initialState);
 
-	const { showAlert, setLoading } = useContext(UiContext);
+	const [, uiDispatch] = useContext(UiContext);
 
 	const register = async (data) => {
-		setLoading(true);
+		uiDispatch({
+			type: types.UI_SET_LOADING,
+		});
 		try {
 			const resp = await fetchWithoutToken(
 				'/auth/register',
@@ -25,34 +28,59 @@ export const AuthProvider = ({ children }) => {
 			);
 			const body = await resp.json();
 			if (!body.success) {
-				showAlert({ text: body.msg, severity: 'error' });
-				setLoading(false);
+				uiDispatch({
+					type: types.UI_SET_LOADING,
+				});
+				uiDispatch({
+					type: types.UI_SET_MESSAGE,
+					payload: { text: body.msg, severity: 'error' },
+				});
+
 				return;
 			}
-			showAlert({ text: body.msg, severity: 'success' });
-			setLoading(false);
+			uiDispatch({
+				type: types.UI_SET_LOADING,
+			});
+			uiDispatch({
+				type: types.UI_SET_MESSAGE,
+				payload: { text: body.msg, severity: 'success' },
+			});
 			return 'success';
 		} catch (err) {
 			console.log(err);
-			setLoading(false);
-			showAlert({
-				text: 'Something went wrong. Please try again later',
-				severity: 'error',
+			uiDispatch({
+				type: types.UI_SET_LOADING,
+			});
+			uiDispatch({
+				type: types.UI_SET_MESSAGE,
+				payload: {
+					text: 'Something went wrong. Please try again later',
+					severity: 'error',
+				},
 			});
 		}
 	};
 
 	const login = async (data) => {
-		setLoading(true);
+		uiDispatch({
+			type: types.UI_SET_LOADING,
+		});
 		try {
 			const resp = await fetchWithoutToken('/auth/login', data, 'POST');
 			const body = await resp.json();
 			if (!body.success) {
-				setLoading(false);
-				showAlert({ text: body.msg, severity: 'error' });
+				uiDispatch({
+					type: types.UI_SET_LOADING,
+				});
+				uiDispatch({
+					type: types.UI_SET_MESSAGE,
+					payload: { text: body.msg, severity: 'error' },
+				});
 				return;
 			}
-			setLoading(false);
+			uiDispatch({
+				type: types.UI_SET_LOADING,
+			});
 			const { uid } = body.user;
 			localStorage.setItem('chat-group:token', body.token);
 			setAuth({
@@ -62,10 +90,15 @@ export const AuthProvider = ({ children }) => {
 			});
 		} catch (err) {
 			console.log(err);
-			setLoading(false);
-			showAlert({
-				text: 'Something went wrong. Please try again later',
-				severity: 'error',
+			uiDispatch({
+				type: types.UI_SET_LOADING,
+			});
+			uiDispatch({
+				type: types.UI_SET_MESSAGE,
+				payload: {
+					text: 'Something went wrong. Please try again later',
+					severity: 'error',
+				},
 			});
 		}
 	};

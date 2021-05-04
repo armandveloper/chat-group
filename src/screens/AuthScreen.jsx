@@ -6,7 +6,8 @@ import Alert from '../components/ui/Alert';
 import Form from '../components/ui/Form';
 
 function AuthScreen() {
-	const { message } = useContext(UiContext);
+	const [uiState] = useContext(UiContext);
+	const { message } = uiState;
 	const { pathname } = useLocation();
 	return (
 		<div className="auth-screen">

@@ -1,27 +1,22 @@
-import { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Plus } from 'react-feather';
-import { UiContext } from '../../context/UiContext';
 import SearchBox from '../ui/SearchBox';
 import SidebarFooter from '../ui/SidebarFooter';
 import SidebarList from './SidebarList';
 import styles from '../layout/Sidebar.module.css';
 
-function SidebarChannels({ show }) {
-	const [shouldRender, setRender] = useState(show);
+function SidebarChannels({
+	channels,
+	show,
+	setSidebarView,
+	getMembers,
+	selectChannel,
+	openModal,
+}) {
+	if (!show) return null;
 
-	const { toggleModal, showChannelInfo } = useContext(UiContext);
-
-	const channels = ['Front-end developers', 'Random', 'Backend', 'Welcome'];
-
-	useEffect(() => {
-		if (show) setRender(true);
-	}, [show]);
-
-	if (!shouldRender) return null;
-
-	const handleAnimationEnd = () => {
-		if (!show) setRender(false);
+	const showChannelInfo = () => {
+		setSidebarView('info');
 	};
 
 	return (
@@ -31,7 +26,7 @@ function SidebarChannels({ show }) {
 				<button
 					className="btn--icon btn--gray"
 					title="Create new channel"
-					onClick={toggleModal}
+					onClick={openModal}
 				>
 					<Plus />
 				</button>
@@ -41,9 +36,11 @@ function SidebarChannels({ show }) {
 			</div>
 			<SidebarList
 				handleClick={true}
+				selectChannel={selectChannel}
 				items={channels}
 				uppercase={true}
 				setChannelView={showChannelInfo}
+				getMembers={getMembers}
 			/>
 			<SidebarFooter />
 		</div>
@@ -52,6 +49,7 @@ function SidebarChannels({ show }) {
 
 SidebarChannels.propTypes = {
 	show: PropTypes.bool.isRequired,
+	openModal: PropTypes.func.isRequired,
 };
 
 export default SidebarChannels;

@@ -2,15 +2,32 @@ import { createContext, useCallback, useContext, useState } from 'react';
 import { fetchWithToken, uploadPhoto } from '../helpers/fetch';
 import { UiContext } from './UiContext';
 import { AuthContext } from './AuthContext';
+import types from '../types';
 
 export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
-	const [channels, setChannels] = useState([]);
 
-	const { setLoading, showAlert, closeModal } = useContext(UiContext);
+	const [, uiDispatch] = useContext(UiContext);
 	const { auth } = useContext(AuthContext);
+
+	const showAlert = (alert) => {
+		uiDispatch({
+			type: types.UI_SET_MESSAGE,
+			payload: alert,
+		});
+	};
+
+	const setLoading = useCallback(
+		(loading) => {
+			uiDispatch({
+				type: types.UI_SET_LOADING,
+				payload: loading,
+			});
+		},
+		[uiDispatch]
+	);
 
 	const getUser = useCallback(async () => {
 		try {
@@ -28,7 +45,9 @@ export const AppProvider = ({ children }) => {
 			const resp = await fetchWithToken(`users/${auth.uid}`, data, 'PUT');
 			const body = await resp.json();
 			if (!body.success) {
-				setLoading(false);
+				uiDispatch({
+					type: types.UI_SET_LOADING,
+				});
 				showAlert({ text: body.msg, severity: 'error' });
 				return;
 			}
@@ -73,41 +92,7 @@ export const AppProvider = ({ children }) => {
 				text: 'An unexpected error occurred. Please try again later',
 				severity: 'error',
 			});
-		} finally {
 			setLoading(false);
-		}
-	};
-
-	const createChannel = async (data) => {
-		setLoading(true);
-		try {
-			const resp = await fetchWithToken(
-				'channels',
-				{ ...data, creator: auth.uid },
-				'POST'
-			);
-			console.log(resp);
-			const body = await resp.json();
-			console.log(body);
-			if (!body.success) {
-				setLoading(false);
-				closeModal();
-				showAlert({ text: body.msg, severity: 'error' });
-				return;
-			}
-			setChannels([...channels, body.channel]);
-			closeModal();
-			showAlert({
-				text: 'The channel has been created',
-				severity: 'success',
-			});
-		} catch (err) {
-			console.log(err);
-			closeModal();
-			showAlert({
-				text: 'An unexpected error occurred. Please try again later',
-				severity: 'error',
-			});
 		} finally {
 			setLoading(false);
 		}
@@ -120,7 +105,6 @@ export const AppProvider = ({ children }) => {
 				getUser,
 				editProfile,
 				editPhoto,
-				createChannel,
 			}}
 		>
 			{children}

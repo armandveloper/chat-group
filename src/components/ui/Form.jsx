@@ -39,7 +39,8 @@ const LoginSchema = Yup.object().shape({
 
 function Form({ type }) {
 	const { register, login } = useContext(AuthContext);
-	const { loading } = useContext(UiContext);
+	const [uiState] = useContext(UiContext);
+	const { loading } = uiState;
 
 	const formik = useFormik({
 		initialValues:

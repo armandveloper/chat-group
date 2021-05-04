@@ -7,16 +7,22 @@ export const useSidebar = () => {
 	const sidebarRef = useRef();
 
 	const showSidebar = () => {
-		sidebarRef.current.classList.add(styles.sidebarShow);
+		sidebarRef.current.classList.add(styles.overlayShow);
+		sidebarRef.current.firstElementChild.classList.add(styles.sidebarShow);
 	};
 
 	const hideSidebar = () => {
-		console.log('ocultando clase:', styles.sidebarShow);
-		sidebarRef.current.classList.remove(styles.sidebarShow);
+		sidebarRef.current.classList.remove(styles.overlayShow);
+		sidebarRef.current.firstElementChild.classList.remove(
+			styles.sidebarShow
+		);
 	};
 
 	const toggleSidebar = () => {
-		sidebarRef.current.classList.toggle(styles.sidebarShow);
+		sidebarRef.current.classList.toggle(styles.overlayShow);
+		sidebarRef.current.firstElementChild.classList.toggle(
+			styles.sidebarShow
+		);
 	};
 
 	return [sidebarRef, toggleSidebar, showSidebar, hideSidebar];

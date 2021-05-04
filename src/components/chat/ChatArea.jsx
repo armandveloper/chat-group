@@ -1,26 +1,17 @@
-import { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { Menu, Send } from 'react-feather';
 import './ChatArea.css';
 import Message from './Message';
 import DateSeparator from './DateSeparator';
-import { UiContext } from '../../context/UiContext';
 
-function ChatArea({ toggleSidebar }) {
-	const { setShowSidebar } = useContext(UiContext);
-
+function ChatArea({ toggleSidebar, channel }) {
 	return (
 		<main className="chat__area">
 			<header className="chat__header">
-				<button
-					className="btn--icon"
-					onClick={() => {
-						toggleSidebar();
-						setShowSidebar(true);
-					}}
-				>
+				<button className="btn--icon" onClick={toggleSidebar}>
 					<Menu color="#fff" size={24} />
 				</button>
-				<h1 className="h1">Front-end developers</h1>
+				<h1 className="h1">{channel?.name}</h1>
 			</header>
 			<div className="chat__conversation">
 				<Message />
@@ -58,5 +49,10 @@ function ChatArea({ toggleSidebar }) {
 		</main>
 	);
 }
+
+ChatArea.propTypes = {
+	toggleSidebar: PropTypes.func.isRequired,
+	channel: PropTypes.func.isRequired,
+};
 
 export default ChatArea;

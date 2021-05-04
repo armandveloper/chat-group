@@ -1,12 +1,20 @@
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { AlertCircle, AlertTriangle, CheckCircle } from 'react-feather';
 import styles from './Alert.module.css';
 import { UiContext } from '../../context/UiContext';
+import types from '../../types';
 
-function Alert({ message, severity, show, autoHideDuration }) {
-	const { hideAlert } = useContext(UiContext);
+function Alert({ message, severity, show, autoHideDuration, onHide }) {
+	const [, uiDispatch] = useContext(UiContext);
 	const [shouldRender, setRender] = useState(show);
+
+	const hideAlert = useCallback(() => {
+		uiDispatch({
+			type: types.UI_SET_MESSAGE,
+			payload: null,
+		});
+	}, [uiDispatch]);
 
 	useEffect(() => {
 		if (show) {
@@ -16,10 +24,10 @@ function Alert({ message, severity, show, autoHideDuration }) {
 
 	useEffect(() => {
 		if (autoHideDuration && show) {
-			const timeout = setTimeout(hideAlert, autoHideDuration);
+			const timeout = setTimeout(onHide || hideAlert, autoHideDuration);
 			return () => clearTimeout(timeout);
 		}
-	}, [show, autoHideDuration, hideAlert]);
+	}, [show, autoHideDuration, hideAlert, onHide]);
 
 	const handleAnimationEnd = () => {
 		if (!show) {
@@ -57,6 +65,7 @@ Alert.propTypes = {
 	severity: PropTypes.oneOf(['success', 'error', 'warning']).isRequired,
 	show: PropTypes.bool.isRequired,
 	autoHideDuration: PropTypes.number,
+	onHide: PropTypes.func,
 };
 
 export default Alert;

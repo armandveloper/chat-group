@@ -10,6 +10,7 @@ import Avatar from '../components/ui/Avatar';
 import Alert from '../components/ui/Alert';
 import { UiContext } from '../context/UiContext';
 import Loader from '../components/ui/Loader';
+import types from '../types';
 
 const acceptedFiles = ['image/png', 'image/jpeg'];
 
@@ -18,8 +19,17 @@ const UserSchema = Yup.object().shape({
 });
 
 function EditProfileScreen() {
-	const { message, loading, showAlert } = useContext(UiContext);
+	const [uiState, uiDispatch] = useContext(UiContext);
+	const { message, loading } = uiState;
+
 	const { user, getUser, editProfile, editPhoto } = useContext(AppContext);
+
+	const showAlert = (alert) => {
+		uiDispatch({
+			type: types.UI_SET_MESSAGE,
+			payload: alert,
+		});
+	};
 
 	const formik = useFormik({
 		initialValues: {

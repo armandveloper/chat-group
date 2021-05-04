@@ -1,19 +1,29 @@
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 import Avatar from '../ui/Avatar';
 import './ListItem.css';
 
-function ListItem({ name, uppercase, handleClick, setChannelView }) {
-	const showChannelView = ({ target }) => {
-		// const $sidebar = target.closest('.sidebar__inner');
-		// $sidebar.classList.add('sidebar__inner--out');
-		// $sidebar.addEventListener('animationend', () => {
-		// 	$sidebar.classList.remove('sidebar__inner--out');
-		// 	setChannelView(true);
-		// });
+function ListItem({
+	id,
+	name,
+	photo,
+	uppercase,
+	handleClick,
+	setChannelView,
+	selectChannel,
+	getMembers,
+}) {
+	const { auth } = useContext(AuthContext);
+
+	const handleSelectChannel = () => {
+		selectChannel(id);
 		setChannelView();
+		getMembers(id);
 	};
+
 	return handleClick ? (
 		// Esta es la lista de canales
-		<li className="sidebar-list-item" onClick={showChannelView}>
+		<li className="sidebar-list-item" onClick={handleSelectChannel}>
 			{/* <img src="" alt="" className="channel-img"/> */}
 			<p
 				className={
@@ -29,7 +39,7 @@ function ListItem({ name, uppercase, handleClick, setChannelView }) {
 		// Esta es la vista de los miembros de un canal
 		<li className="sidebar-list-item grid">
 			{/* <img src="" alt="" className="channel-img"/> */}
-			<Avatar />
+			<Avatar url={photo} name={name} />
 			<p
 				className={
 					uppercase
@@ -37,7 +47,7 @@ function ListItem({ name, uppercase, handleClick, setChannelView }) {
 						: 'sidebar-list-item__name'
 				}
 			>
-				{name}
+				{name} {id === auth.uid && '(Your)'}
 			</p>
 		</li>
 	);

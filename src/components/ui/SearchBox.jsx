@@ -1,16 +1,15 @@
-import React from 'react';
 import { Search } from 'react-feather';
-import './SearchBox.css';
+import styles from './SearchBox.module.css';
 
 function SearchBox() {
 	return (
-		<div className="searchbox">
+		<div className={styles.box}>
 			<button type="submit" className="btn--icon" title="Search Channel">
 				<Search />
 			</button>
 			<input
 				type="text"
-				className="searchbox__input"
+				className={styles.input}
 				placeholder="Search"
 				aria-label="Search"
 			/>

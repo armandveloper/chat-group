@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import Avatar from '../ui/Avatar';
-import './ListItem.css';
+import styles from './ListItem.module.css';
 
 function ListItem({
 	id,
@@ -23,29 +23,23 @@ function ListItem({
 
 	return handleClick ? (
 		// Esta es la lista de canales
-		<li className="sidebar-list-item" onClick={handleSelectChannel}>
-			{/* <img src="" alt="" className="channel-img"/> */}
+		<li className={styles.sidebarListItem} onClick={handleSelectChannel}>
 			<p
-				className={
-					uppercase
-						? 'sidebar-list-item__name sidebar-list-item__name--uppercase'
-						: 'sidebar-list-item__name'
-				}
+				className={`${styles.sidebarListItemName} ${
+					uppercase ? styles.uppercase : ''
+				}`}
 			>
 				{name}
 			</p>
 		</li>
 	) : (
 		// Esta es la vista de los miembros de un canal
-		<li className="sidebar-list-item grid">
-			{/* <img src="" alt="" className="channel-img"/> */}
+		<li className={`${styles.sidebarListItem} ${styles.grid}`}>
 			<Avatar url={photo} name={name} />
 			<p
-				className={
-					uppercase
-						? 'sidebar-list-item__name sidebar-list-item__name--uppercase'
-						: 'sidebar-list-item__name'
-				}
+				className={`${styles.sidebarListItemName} ${
+					uppercase ? styles.uppercase : ''
+				}`}
 			>
 				{name} {id === auth.uid && '(Your)'}
 			</p>

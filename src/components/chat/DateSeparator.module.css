@@ -1,4 +1,4 @@
-.date-separator {
+.separator {
 	margin-bottom: 2.5rem;
 	user-select: none;
 	width: 100%;
@@ -7,8 +7,8 @@
 	column-gap: 2rem;
 	align-items: center;
 }
-.date-separator::before,
-.date-separator::after {
+.separator::before,
+.separator::after {
 	content: '';
 	border: 1px solid #828282;
 }

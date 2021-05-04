@@ -4,7 +4,7 @@ import { AppContext } from '../../context/AppContext';
 import { usePopupMenu } from '../../hooks/usePopupMenu';
 import Avatar from '../ui/Avatar';
 import Menu from './Menu';
-import './SidebarFooter.css';
+import styles from './SidebarFooter.module.css';
 
 function SidebarFooter() {
 	const { user } = useContext(AppContext);
@@ -12,9 +12,9 @@ function SidebarFooter() {
 	const [isMenuOpen, toggleMenu] = usePopupMenu();
 
 	return (
-		<div className="sidebar__footer">
+		<div className={styles.footer}>
 			<Avatar name={user?.name || ''} url={user?.photo || ''} />
-			<p className="username">{user?.name}</p>
+			<p className={styles.username}>{user?.name}</p>
 			<button className="btn--icon relative" onClick={toggleMenu}>
 				<ChevronDown />
 			</button>

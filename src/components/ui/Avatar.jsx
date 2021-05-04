@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
-import './Avatar.css';
+import styles from './Avatar.module.css';
 
 function Avatar({ url, name }) {
 	// if (!url) return null;
 
 	if (!url) {
-		return <div className="avatar-div" />;
+		return <div className={styles.div} />;
 	}
-	return <img className="avatar" src={url} alt={name} />;
+	return <img className={styles.avatar} src={url} alt={name} />;
 }
 
 Avatar.propTypes = {

@@ -1,4 +1,4 @@
-.chat__area {
+.content {
 	flex: 1;
 	background-color: var(--chat-bg-color);
 	color: #fff;
@@ -7,7 +7,7 @@
 	display: flex;
 	flex-direction: column;
 }
-.chat__header {
+.header {
 	background-color: #252329;
 	padding: 1.5rem;
 	user-select: none;
@@ -15,42 +15,42 @@
 	align-items: center;
 }
 @media (min-width: 75em) {
-	.chat__header {
+	.header {
 		padding: 2rem 7.8rem 1.4rem 7rem;
 	}
 }
-.chat__header .btn--icon {
+.menu {
 	margin-right: 2rem;
 }
-.chat__conversation {
+.conversation {
 	flex: 1;
 	margin: 0 0 2.8rem 0;
 	overflow: hidden auto;
 	padding: 4rem 2rem 0;
 }
 @media (min-width: 75em) {
-	.chat__header .btn--icon {
+	.menu {
 		display: none;
 	}
-	.chat__conversation {
+	.conversation {
 		padding: 4rem 7.6rem 1.5rem 7rem;
 	}
 }
-.chat__footer {
+.footer {
 	padding: 2rem;
 }
-.chat__footer-inner {
+.footerInner {
 	height: 5.2rem;
 	display: grid;
 	grid-template-columns: 1fr 3.2rem 0.7rem;
 	align-items: center;
 }
 @media (min-width: 75em) {
-	.chat__footer {
+	.footer {
 		padding: 0 7.8rem 3.5rem 7rem;
 	}
 }
-.chat__input {
+.input {
 	background-color: #3c393f;
 	border-radius: 0.8rem;
 	border: none;
@@ -61,18 +61,19 @@
 	grid-row: 1;
 	grid-column: 1 / -1;
 }
-.chat__input:focus,
-.chat__footer .btn--blue:focus {
+.input:focus,
+.btn {
 	outline: none;
 }
-.chat__footer .btn--blue {
+.btn {
 	grid-row: 1;
 	grid-column: 2 / 3;
 }
-.chat__footer .btn--blue svg {
+.btn svg {
 	transform: translateX(-2.5px) rotate(45deg);
 	transition: transform 0.2s ease-in;
 }
-.chat__footer .btn--blue:focus svg {
+.btn:focus svg,
+.btn:hover svg {
 	transform: rotate(0deg);
 }

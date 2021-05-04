@@ -1,19 +1,22 @@
 import PropTypes from 'prop-types';
 import { Menu, Send } from 'react-feather';
-import './ChatArea.css';
+import styles from './ChatArea.module.css';
 import Message from './Message';
 import DateSeparator from './DateSeparator';
 
 function ChatArea({ toggleSidebar, channel }) {
 	return (
-		<main className="chat__area">
-			<header className="chat__header">
-				<button className="btn--icon" onClick={toggleSidebar}>
+		<main className={styles.content}>
+			<header className={styles.header}>
+				<button
+					className={`btn--icon ${styles.menu}`}
+					onClick={toggleSidebar}
+				>
 					<Menu color="#fff" size={24} />
 				</button>
 				<h1 className="h1">{channel?.name}</h1>
 			</header>
-			<div className="chat__conversation">
+			<div className={styles.conversation}>
 				<Message />
 				<Message />
 				<Message />
@@ -30,16 +33,16 @@ function ChatArea({ toggleSidebar, channel }) {
 				<Message />
 				<Message />
 			</div>
-			<div className="chat__footer">
-				<div className="chat__footer-inner">
+			<div className={styles.footer}>
+				<div className={styles.footerInner}>
 					<input
 						type="text"
-						className="chat__input"
+						className={styles.input}
 						placeholder="Type a message here"
 						aria-label="Type a message"
 					/>
 					<button
-						className="btn--icon btn--blue"
+						className={`btn--icon btn--blue ${styles.btn}`}
 						title="Send message"
 					>
 						<Send size={20} />
@@ -52,7 +55,6 @@ function ChatArea({ toggleSidebar, channel }) {
 
 ChatArea.propTypes = {
 	toggleSidebar: PropTypes.func.isRequired,
-	channel: PropTypes.func.isRequired,
 };
 
 export default ChatArea;

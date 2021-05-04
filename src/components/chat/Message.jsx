@@ -1,20 +1,19 @@
-import React from 'react';
+import styles from './Message.module.css';
 import Avatar from '../ui/Avatar';
-import './Message.css';
 
-function Message(props) {
+function Message() {
 	// const { contact, datetime, text, avatar } = props;
 	return (
-		<div className="message">
+		<div className={styles.message}>
 			<Avatar />
-			<div className="message__info">
-				<div className="message__metadata">
-					<p className="message__sender">Armando Cruz</p>
-					<small className="message__date-time">
+			<div>
+				<div className={styles.metadata}>
+					<p className={styles.sender}>Armando Cruz</p>
+					<small className={styles.timestamp}>
 						yesterday at 2:29 PM
 					</small>
 				</div>
-				<p className="message__text">
+				<p className={styles.text}>
 					Lorem ipsum dolor 🤦‍♂️sit, amet consectetur adipisicing elit.
 					Labore dolorum voluptas illo praesentium nulla👆 excepturi
 					aperiam magni veniam dolore sequi! 👱‍♀️

@@ -1,4 +1,4 @@
-.searchbox {
+.box {
 	background-color: #3c393f;
 	border-radius: 0.8rem;
 	height: 4.8rem;
@@ -6,7 +6,7 @@
 	display: flex;
 	align-items: center;
 }
-.searchbox__input {
+.input {
 	background: none;
 	border: none;
 	color: #fff;
@@ -14,6 +14,6 @@
 	margin-left: 1rem;
 	flex: 1;
 }
-.searchbox__input:focus {
+.input:focus {
 	outline: none;
 }

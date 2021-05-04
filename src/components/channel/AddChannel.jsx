@@ -2,8 +2,6 @@ import { useContext } from 'react';
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import { UiContext } from '../../context/UiContext';
-import { AppContext } from '../../context/AppContext';
 import Loader from '../ui/Loader';
 import styles from './AddChannel.module.css';
 import { AuthContext } from '../../context/AuthContext';

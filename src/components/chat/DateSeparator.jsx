@@ -1,10 +1,9 @@
-import React from 'react';
-import './DateSeparator.css';
+import styles from './DateSeparator.module.css';
 
 function DateSeparator({ date }) {
 	return (
-		<div className="date-separator">
-			<small className="date-separator__date">{date}</small>
+		<div className={styles.separator}>
+			<small className={styles.date}>{date}</small>
 		</div>
 	);
 }

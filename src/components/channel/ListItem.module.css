@@ -1,4 +1,4 @@
-.sidebar-list-item {
+.sidebarListItem {
 	cursor: pointer;
 	padding: 1.5rem 2rem 1.5rem 2rem;
 }
@@ -9,15 +9,14 @@
 	column-gap: 2rem;
 }
 @media (min-width: 75em) {
-	.sidebar-list-item {
+	.sidebarListItem {
 		padding: 1.5rem 2.5rem 1.5rem 3.2rem;
 	}
 }
-
-.sidebar-list-item:hover {
+.sidebarListItem:hover {
 	background-color: #3c393f;
 }
-.sidebar-list-item__name {
+.sidebarListItemName {
 	font-size: 1.4rem;
 	font-weight: 700;
 	margin: 0;
@@ -25,6 +24,6 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
-.sidebar-list-item__name--uppercase {
+.uppercase {
 	text-transform: uppercase;
 }

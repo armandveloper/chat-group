@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { ChevronLeft } from 'react-feather';
-// import { UiContext } from '../../context/UiContext';
-// import types from '../../types';
 import SidebarFooter from '../ui/SidebarFooter';
 import SidebarList from './SidebarList';
 import styles from '../layout/Sidebar.module.css';

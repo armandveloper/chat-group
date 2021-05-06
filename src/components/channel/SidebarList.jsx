@@ -1,10 +1,13 @@
-import styles from '../layout/Sidebar.module.css';
-import itemStyles from './ListItem.module.css';
-import ListItem from './ListItem';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 import { Plus } from 'react-feather';
+import styles from '../layout/Sidebar.module.css';
+import ListItem from './ListItem';
+import itemStyles from './ListItem.module.css';
 
 function SidebarList({
 	items,
+	channel,
 	uppercase,
 	handleClick,
 	addMember,
@@ -13,6 +16,8 @@ function SidebarList({
 	getMembers,
 	openModal,
 }) {
+	const { auth } = useContext(AuthContext);
+
 	return (
 		<ul className={styles.list}>
 			{items.map((item) => (
@@ -29,7 +34,7 @@ function SidebarList({
 					setChannelView={setChannelView}
 				/>
 			))}
-			{addMember && (
+			{addMember && auth.uid === channel?.creator && (
 				<li
 					className={`${itemStyles.sidebarListItem} ${itemStyles.grid}`}
 					onClick={() => openModal('invite-member')}

@@ -8,8 +8,6 @@ import styles from '../layout/Sidebar.module.css';
 function SidebarChannel({ channel, show, setSidebarView, openModal }) {
 	const [shouldRender, setRender] = useState(show);
 
-	// const [, uiDispatch] = useContext(UiContext);
-
 	const members = channel?.members || [];
 
 	useEffect(() => {
@@ -54,6 +52,7 @@ function SidebarChannel({ channel, show, setSidebarView, openModal }) {
 			<h4 className={styles.membersTitle}>Members</h4>
 			<SidebarList
 				items={members}
+				channel={channel}
 				addMember={true}
 				openModal={openModal}
 			/>

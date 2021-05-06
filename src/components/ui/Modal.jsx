@@ -5,8 +5,6 @@ import styles from './Modal.module.css';
 function Modal({ open, onClose, children }) {
 	const [shouldRender, setRender] = useState(open);
 
-	console.log('should render:', shouldRender);
-
 	useEffect(() => {
 		if (open) setRender(true);
 	}, [open]);

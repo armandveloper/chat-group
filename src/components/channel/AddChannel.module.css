@@ -31,3 +31,55 @@
 	display: block;
 	margin-left: auto;
 }
+.tags {
+	height: unset;
+	min-height: 11.5rem;
+}
+.selected {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+}
+.tag {
+	background-color: #120f13;
+	border-radius: 0.4rem;
+	cursor: pointer !important;
+	font-size: 1.2rem;
+	font-family: inherit;
+	padding: 0.5rem;
+	margin-bottom: 1rem;
+	display: inline-flex;
+	align-items: center;
+}
+.tag:not(:last-of-type) {
+	margin-right: 1rem;
+}
+.remove {
+	background: none;
+	border: none;
+	color: #fff;
+	font-size: 1.8rem;
+	margin: 0 0 0 0.6rem;
+	padding: 0;
+	position: relative;
+	top: 0.2rem;
+}
+.tagInput {
+	flex: 1;
+	display: inline-block;
+	margin-left: 1rem;
+}
+.tagInputField {
+	background: none;
+	border: none;
+	color: #fff;
+	font-family: inherit;
+	font-size: 1.6rem;
+	width: 100%;
+}
+.tagInputField::placeholder {
+	color: #fff;
+}
+.tagInputField:focus {
+	outline: none;
+}

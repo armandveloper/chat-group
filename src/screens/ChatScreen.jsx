@@ -8,6 +8,7 @@ import ChatArea from '../components/chat/ChatArea';
 import Alert from '../components/ui/Alert';
 import Modal from '../components/ui/Modal';
 import AddChannel from '../components/channel/AddChannel';
+import InviteMember from '../components/channel/InviteMember';
 
 function ChatScreen() {
 	const { auth } = useContext(AuthContext);
@@ -28,9 +29,14 @@ function ChatScreen() {
 		}
 	}, [user, getUser]);
 	const [isModalOpen, setModalOpen] = useState(false);
-
+	const [modalContent, setModalContent] = useState('add-channel'); // add-channel | invite-member
 	const closeModal = () => setModalOpen(false);
-	const openModal = () => setModalOpen(true);
+	const openModal = (content = 'add-channel') => {
+		setModalContent(
+			content === 'invite-member' ? 'invite-member' : 'add-channel'
+		);
+		setModalOpen(true);
+	};
 
 	// Channel: { id, name,description, members: [] }
 	const [channels, setChannels] = useState([]);
@@ -115,13 +121,23 @@ function ChatScreen() {
 			/>
 			<ChatArea channel={selectedChannel} toggleSidebar={toggleSidebar} />
 			<Modal open={isModalOpen} onClose={closeModal}>
-				<AddChannel
-					loading={loading}
-					setLoading={setLoading}
-					showAlert={showAlert}
-					setChannels={setChannels}
-					closeModal={closeModal}
-				/>
+				{modalContent === 'add-channel' ? (
+					<AddChannel
+						loading={loading}
+						setLoading={setLoading}
+						showAlert={showAlert}
+						setChannels={setChannels}
+						closeModal={closeModal}
+					/>
+				) : (
+					<InviteMember
+						loading={loading}
+						channel={selectedChannel}
+						setLoading={setLoading}
+						showAlert={showAlert}
+						closeModal={closeModal}
+					/>
+				)}
 			</Modal>
 		</>
 	);

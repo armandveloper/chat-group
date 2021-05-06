@@ -32,6 +32,7 @@ const Sidebar = forwardRef(function Sidebar(
 					setSidebarView={setSidebarView}
 					channel={selectedChannel}
 					show={sidebarView === 'info'}
+					openModal={openModal}
 				/>
 			</aside>
 			<button

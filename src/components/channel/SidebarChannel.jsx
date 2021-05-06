@@ -5,7 +5,7 @@ import SidebarFooter from '../ui/SidebarFooter';
 import SidebarList from './SidebarList';
 import styles from '../layout/Sidebar.module.css';
 
-function SidebarChannel({ channel, show, setSidebarView }) {
+function SidebarChannel({ channel, show, setSidebarView, openModal }) {
 	const [shouldRender, setRender] = useState(show);
 
 	// const [, uiDispatch] = useContext(UiContext);
@@ -52,7 +52,11 @@ function SidebarChannel({ channel, show, setSidebarView }) {
 				<p>{channel?.description}</p>
 			</div>
 			<h4 className={styles.membersTitle}>Members</h4>
-			<SidebarList items={members} />
+			<SidebarList
+				items={members}
+				addMember={true}
+				openModal={openModal}
+			/>
 			<SidebarFooter />
 		</div>
 	);

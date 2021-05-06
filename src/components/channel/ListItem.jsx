@@ -7,6 +7,7 @@ function ListItem({
 	id,
 	name,
 	photo,
+	members,
 	uppercase,
 	handleClick,
 	setChannelView,
@@ -18,7 +19,8 @@ function ListItem({
 	const handleSelectChannel = () => {
 		selectChannel(id);
 		setChannelView();
-		getMembers(id);
+		// Evita otro llamado si ya están los miembros en memoria
+		!members && getMembers(id);
 	};
 
 	return handleClick ? (
